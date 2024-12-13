@@ -1,6 +1,6 @@
 {
-  "domain": "integration_blueprint",
-  "name": "Integration blueprint",
+  "domain": "Ecoflow",
+  "name": "Powerocean",
   "codeowners": [
     "@ludeeus"
   ],

@@ -9,17 +9,17 @@ if TYPE_CHECKING:
     from homeassistant.config_entries import ConfigEntry
     from homeassistant.loader import Integration
 
-    from .api import IntegrationBlueprintApiClient
+    from .api import PowerOceanApiClient
     from .coordinator import BlueprintDataUpdateCoordinator
 
 
-type IntegrationBlueprintConfigEntry = ConfigEntry[IntegrationBlueprintData]
+type PowerOceanConfigEntry = ConfigEntry[PowerOceanData]
 
 
 @dataclass
-class IntegrationBlueprintData:
+class PowerOceanData:
     """Data for the Blueprint integration."""
 
-    client: IntegrationBlueprintApiClient
+    client: PowerOceanApiClient
     coordinator: BlueprintDataUpdateCoordinator
     integration: Integration
