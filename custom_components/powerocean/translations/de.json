@@ -2,7 +2,7 @@
     "config": {
         "step": {
             "user": {
-                "description": "test deutsch powerocean",
+                "description": "Bitte geben Sie unten Ihre PowerOcean Geräteinformationen ein:",
                 "data": {
                     "serial": "Serialnumber",
                     "email": "Email",

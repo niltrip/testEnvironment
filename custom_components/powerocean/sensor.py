@@ -12,7 +12,7 @@ if TYPE_CHECKING:
     from homeassistant.core import HomeAssistant
     from homeassistant.helpers.entity_platform import AddEntitiesCallback
 
-    from .coordinator import BlueprintDataUpdateCoordinator
+    from .coordinator import PowerOceanDataUpdateCoordinator
     from .data import PowerOceanConfigEntry
 
 ENTITY_DESCRIPTIONS = (
@@ -44,7 +44,7 @@ class PowerOceanSensor(PowerOceanEntity, SensorEntity):
 
     def __init__(
         self,
-        coordinator: BlueprintDataUpdateCoordinator,
+        coordinator: PowerOceanDataUpdateCoordinator,
         entity_description: SensorEntityDescription,
     ) -> None:
         """Initialize the sensor class."""

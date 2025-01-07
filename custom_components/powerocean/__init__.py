@@ -9,12 +9,12 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING
 
-from homeassistant.const import CONF_PASSWORD, CONF_EMAIL, CONF_DEVICE_ID, Platform
+from homeassistant.const import CONF_DEVICE_ID, CONF_EMAIL, CONF_PASSWORD, Platform
 from homeassistant.helpers.aiohttp_client import async_get_clientsession
 from homeassistant.loader import async_get_loaded_integration
 
 from .api import PowerOceanApiClient
-from .coordinator import BlueprintDataUpdateCoordinator
+from .coordinator import PowerOceanDataUpdateCoordinator
 from .data import PowerOceanData
 
 if TYPE_CHECKING:
@@ -35,7 +35,7 @@ async def async_setup_entry(
     entry: PowerOceanConfigEntry,
 ) -> bool:
     """Set up this integration using UI."""
-    coordinator = BlueprintDataUpdateCoordinator(
+    coordinator = PowerOceanDataUpdateCoordinator(
         hass=hass,
     )
     entry.runtime_data = PowerOceanData(

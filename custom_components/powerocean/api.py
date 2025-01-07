@@ -10,6 +10,8 @@ import aiohttp
 import async_timeout
 from homeassistant.util.json import json_loads
 
+from .const import LOGGER
+
 
 class PowerOceanApiClientError(Exception):
     """Exception to indicate a general API error."""
@@ -52,27 +54,26 @@ class PowerOceanApiClient:
         self._email = email
         self._password = password
         self._session = session
-        self._url_iot_app = "https://api.ecoflow.com/auth/login"
-        self._url_user_fetch = f"https://api-e.ecoflow.com/provider-service/user/device/detail?sn={self.serial}"
+        self._url_auth = "https://api.ecoflow.com/auth/login"
+        self._url_fetch_data = f"https://api-e.ecoflow.com/provider-service/user/device/detail?sn={self.serial}"
         self._token = None
 
     async def async_authorize(self) -> Any:
-        """Function authorize"""
+        """Authorize the user."""
         headers = {"lang": "en_US", "content-type": "application/json"}
         data = {
             "email": self._email,
             "password": base64.b64encode(self._password.encode()).decode(),
-            "scene": "IOT_APP",
+            "scene": "EP_ADMIN",
             "userType": "ECOFLOW",
         }
         response = self._api_wrapper(
             method="post",
-            url=self._url_iot_app,
+            url=self._url_auth,
             data=data,
             headers=headers,
         )
-        response = json_loads(response.)
-        response_message = response["message"]
+        response = await response
         self.token = response["data"]["token"]  # type: ignore  # noqa: PGH003
 
     async def async_get_data(self) -> Any:
@@ -80,6 +81,8 @@ class PowerOceanApiClient:
         return await self._api_wrapper(
             method="get",
             url="https://jsonplaceholder.typicode.com/posts/1",
+            # url=self._url_fetch_data,
+            # headers={"authorization": f"Bearer {self._token}"},
         )
 
     async def async_set_title(self, value: str) -> Any:
